@@ -27,7 +27,10 @@ int main()
             all_pos();
         
         else if(i == 5)
+        {
             print_file();
+            break;
+        }
             
 
     }
