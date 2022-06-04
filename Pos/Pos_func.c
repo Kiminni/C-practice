@@ -105,19 +105,9 @@ void all_pos(void)
     printf("총 %d개, %d원 \n \n",mart[0].num,mart[0].price);
 }
 
-void open_file(void)
-{
-    fp = fopen("reciept.txt","at+");
-}
-
-void close_file(void)
-{
-    fclose(fp);
-}
-
 void print_file(void)
 
-{  
+{   fp = fopen("reciept.txt","at+");
     for(int i = 1; i<101; i++)
         if(mart[i].value != 0)
             fprintf(fp,"%d번 이름: %s, 개당 가격: %d, 개수: %d, 총 금액: %d \n",mart[i].num, mart[i].name,mart[i].value,mart[i].num,mart[i].price);
@@ -126,4 +116,5 @@ void print_file(void)
     printf("정상적으로 출력되었습니다.\n");
     printf("프로그램이 종료됩니다.\n");
     fprintf(fp,"정상적으로 출력되었습니다.\n");
+    fclose(fp);
 }
