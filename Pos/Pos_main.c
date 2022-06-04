@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include "Pos_main.h"
 
-
-
 int main()
 {   
-    open_file();    
     int total = 0;
     int i = 0;
 
@@ -34,8 +31,6 @@ int main()
             
 
     }
-  
-    close_file();
     return 0;
 
 }

@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include "Pos_main.h"
 
-struct things mart[101]  = {0,};
 FILE* fp;
-void print(void)
 
+struct things mart[101]  = {0,};
+
+int all_num = 0;
+int all_price = 0;
+
+void print(void)
 {
     printf("-------------------------- \n");
     printf("0. 메뉴 다시 출력. \n");
@@ -30,8 +34,10 @@ int add_pos()
             scanf("%d",&num1);
 
             if(mart[num1].num != 0)
+            {
                 printf("이미 추가된 항목이므로 추가 할 수 없습니다! 다른 번호를 골라주세요. \n");
-
+                continue;        
+            }
             printf("항목의 이름은 무엇입니까? \n");
             scanf("%s",&mart[num1].name);
            
@@ -44,8 +50,8 @@ int add_pos()
             mart[num1].price = mart[num1].num * mart[num1].value;
             printf("이름: %s, 개당 가격: %d, 개수: %d, 총 금액: %d \n",mart[num1].name,mart[num1].value,mart[num1].num,mart[num1].price);
 
-            mart[0].num += mart[num1].num;
-            mart[0].price += mart[num1].price;
+            all_num += mart[num1].num;
+            all_price += mart[num1].price;
         }
         else 
            printf("초기 화면으로 돌아갑니다.");
@@ -76,9 +82,12 @@ int change_pos()
         scanf("%d",&num);
 
         if(mart[num].num == 0)
+        {   
             printf("빈 항목이므로 수정 할 수 없습니다! 다른 번호를 골라주세요. \n");
-        mart[0].num -= mart[num].num;
-        mart[0].price -= mart[num].price;
+            continue;        
+        }
+        all_num -= mart[num].num;
+        all_price -= mart[num].price;
 
         printf("항목의 이름은 무엇입니까? \n");
         scanf("%s",&mart[num].name);
@@ -91,18 +100,18 @@ int change_pos()
 
         mart[num].price = mart[num].num * mart[num].value;
         
-        mart[0].num += mart[num].num;
-        mart[0].price += mart[num].price;
+        all_num += mart[num].num;
+        all_price += mart[num].price;
         printf("이름: %s, 개당 가격: %d, 개수: %d, 총 금액: %d \n",mart[num].name,mart[num].value,mart[num].num,mart[num].price);
         
-        printf("계속 하고 싶다면 0번을 누르세요. 다른 번호를 누르면 초기화면으로 돌아갑니다.");
+        printf("계속 하고 싶다면 0번을 누르세요. 다른 번호를 누르면 초기화면으로 돌아갑니다.\n");
         scanf("%d",&change_num);
     }
 }
 
 void all_pos(void)
 {
-    printf("총 %d개, %d원 \n \n",mart[0].num,mart[0].price);
+    printf("총 %d개, %d원 \n \n",all_num,all_price);
 }
 
 void print_file(void)
@@ -111,7 +120,7 @@ void print_file(void)
     for(int i = 1; i<101; i++)
         if(mart[i].value != 0)
             fprintf(fp,"%d번 이름: %s, 개당 가격: %d, 개수: %d, 총 금액: %d \n",mart[i].num, mart[i].name,mart[i].value,mart[i].num,mart[i].price);
-    fprintf(fp,"총 %d개, %d원 \n",mart[0].num,mart[0].price);
+    fprintf(fp,"총 %d개, %d원 \n",all_num,all_price);
     
     printf("정상적으로 출력되었습니다.\n");
     printf("프로그램이 종료됩니다.\n");
