@@ -12,7 +12,7 @@ void print(void)
     printf("2. 주문 수정 \n");
     printf("3. 현재 주문 조회 \n");
     printf("4. 주문 정산 \n");
-    printf("5. 저장용 출력 \n");
+    printf("5. 파일에 저장(프로그램이 종료됩니다!) \n");
     printf("------------------------- \n");
     printf("다른 숫자를 누르면 프로그램이 종료됩니다. \n");
 }
@@ -124,5 +124,6 @@ void print_file(void)
     fprintf(fp,"총 %d개, %d원 \n",mart[0].num,mart[0].price);
     
     printf("정상적으로 출력되었습니다.\n");
+    printf("프로그램이 종료됩니다.\n");
     fprintf(fp,"정상적으로 출력되었습니다.\n");
 }
